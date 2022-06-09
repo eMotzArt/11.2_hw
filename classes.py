@@ -32,39 +32,13 @@ class RepositoryCandidates:
             return skillful_candidates
         return None
 
+    def get_by_name(self, name: str) -> Optional[list[dict]]:
+        candidates = self.load_candidates()
+        founded_candidates = []
+        for candidate in candidates:
+            if name.lower() in map(lambda low_name: low_name.lower(), candidate['name'].split()):
+                founded_candidates.append(candidate)
 
-class AppTemplateRenderer:
-    def render_index(candidates_list: list[dict]) -> str:
-        to_return_list = []
-        for candidate in candidates_list:
-            to_return_list.append(f"{candidate['name']}\n" \
-                                  f"{candidate['id']}\n" \
-                                  f"{candidate['skills']}\n\n")
-        to_return_str = Preformater.pre(''.join(to_return_list))
-        return to_return_str
-
-    def render_by_id(candidate: dict) -> str:
-        to_return_list = []
-
-        to_return_list.append(f'<img src={candidate["picture"]}>\n\n')
-        to_return_list.append(f"{candidate['name']}\n" \
-                              f"{candidate['id']}\n" \
-                              f"{candidate['skills']}")
-        to_return_str = Preformater.pre(''.join(to_return_list))
-
-        return to_return_str
-
-    def render_by_skill(candidates_list: list[dict]) -> str:
-        to_return_list = []
-        for candidate in candidates_list:
-            to_return_list.append(f"{candidate['name']}\n" \
-                                  f"{candidate['id']}\n" \
-                                  f"{candidate['skills']}\n\n")
-        to_return_str = Preformater.pre(''.join(to_return_list))
-        return to_return_str
-
-
-class Preformater:
-    @classmethod
-    def pre(cls, data: str) -> str:
-        return f'<pre>{data}</pre>'
+        if founded_candidates:
+            return founded_candidates
+        return None

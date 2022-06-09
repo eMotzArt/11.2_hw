@@ -61,5 +61,14 @@
     "gender": "female",
     "age": 33,
     "skills": "Python, Django, flask"
+  },
+    {
+    "id": 8,
+    "name": "Day Sunday",
+    "picture": "https://picsum.photos/200",
+    "position": "Backend developer",
+    "gender": "male",
+    "age": 23,
+    "skills": "Python, Django, flask, go, c++, c#"
   }
 ]

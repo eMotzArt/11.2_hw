@@ -1,5 +1,5 @@
 from flask import Flask, abort, render_template
-from classes import RepositoryCandidates, AppTemplateRenderer as Renderer
+from classes import RepositoryCandidates
 
 app = Flask(__name__)
 
@@ -19,7 +19,6 @@ def page_per_num(candidate_number: int):
 
     if candidate := RepositoryCandidates(CANDIDATES_FILE).get_by_id(candidate_number):
         return render_template('card.html', candidate=candidate)
-        return Renderer.render_by_id(candidate)
     else:
         abort(404)
 
@@ -27,6 +26,13 @@ def page_per_num(candidate_number: int):
 def page_per_skills(skill: str):
     if candidates := RepositoryCandidates(CANDIDATES_FILE).get_by_skill(skill):
         return render_template('skills.html', candidates=candidates, skill=skill)
+    else:
+        abort(404)
+
+@app.route('/search/<name>')
+def page_per_name(name: str):
+    if candidates := RepositoryCandidates(CANDIDATES_FILE).get_by_name(name):
+        return render_template('search.html', candidates=candidates, name=name)
     else:
         abort(404)
 
