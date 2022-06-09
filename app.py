@@ -1,5 +1,5 @@
-from flask import Flask, abort
-from classes import RepositoryCandidates, Preformater, AppTemplateRenderer as Renderer
+from flask import Flask, abort, render_template
+from classes import RepositoryCandidates, AppTemplateRenderer as Renderer
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ CANDIDATES_FILE: str = 'candidates.json'
 def page_index():
     candidates = RepositoryCandidates(CANDIDATES_FILE).get_all()
     if candidates:
-        return Renderer.render_index(candidates)
+        return render_template('list.html', candidates=candidates)
     else:
         abort(404)
 
