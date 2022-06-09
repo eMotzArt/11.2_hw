@@ -26,7 +26,7 @@ def page_per_num(candidate_number: int):
 @app.route('/skills/<skill>')
 def page_per_skills(skill: str):
     if candidates := RepositoryCandidates(CANDIDATES_FILE).get_by_skill(skill):
-        return Renderer.render_by_skill(candidates)
+        return render_template('skills.html', candidates=candidates, skill=skill)
     else:
         abort(404)
 
