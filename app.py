@@ -18,6 +18,7 @@ def page_index():
 def page_per_num(candidate_number: int):
 
     if candidate := RepositoryCandidates(CANDIDATES_FILE).get_by_id(candidate_number):
+        return render_template('card.html', candidate=candidate)
         return Renderer.render_by_id(candidate)
     else:
         abort(404)
