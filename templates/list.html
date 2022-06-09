@@ -1,0 +1,6 @@
+<h1>Все кандидаты</h1>
+
+
+{% for candidate in candidates %}
+    <p><a href="/candidates/{{ candidate.id }}">{{ candidate.name }}</a></p>
+{% endfor %}
